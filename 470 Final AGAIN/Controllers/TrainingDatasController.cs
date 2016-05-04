@@ -180,11 +180,11 @@ namespace _470_Final_AGAIN.Controllers
             ViewBag.Salty = "No memes";
             
                 
-            id3learning.Run(inputs, outputs);
+           // id3learning.Run(inputs, outputs);
 
 
-            String answer=  codebook.Translate("ShowUser", tree.Compute(codebook.Translate("No", "No", "No", "No", "No", "No", "3", "<10")));
-            ViewBag.Salty = answer;
+            //String answer=  codebook.Translate("ShowUser", tree.Compute(codebook.Translate("No", "No", "No", "No", "No", "No", "3", "<10")));
+            //ViewBag.Salty = answer;
            
         }
     }
