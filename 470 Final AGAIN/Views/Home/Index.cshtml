@@ -1,16 +1,21 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<div class="jumbotron">
-    <h1>Food for Thought</h1>
-    <p class="lead">Food for Thought is a project made by people, for people, and nothing but the people. Robots are not allowed to use this</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
-<div class="row">
-    <div class="col-md-8">
-        <h2><s>Simulate</s> Stimulate your tastebuds now!</h2>
-        <p> <a class="btn btn-default" >Start here! &raquo;</a></p>
+    <h1>Food for Thought</h1>
+    <div id="lead">
+        </div>
+    
+<script src="~/Scripts/customscript.js"></script>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+
+        <br /><br />
+      <div class="list-inline">  <font class="heading" id="strike">Simulate</font> <font class="heading"  id="disappear" style="display:none">Stimulate </font><font class="heading" > your tastebuds now!</font>
+        
+    </div>
+
 
         @using (Html.BeginForm("Ingredients", "Api"))
         {
@@ -21,6 +26,39 @@
             @Html.TextBox("Ingredient5")
             <input type="submit" name="Submit" value="Submit" />
         }
-        
-    </div>
-</div>
+
+ @*this javascript functions are only specific to this page so I kept them here.*@
+<script>
+    var showText = function (target, message, index, interval) {
+        if (index < message.length) {
+            $(target).append(message[index++]);
+            setTimeout(function () { showText(target, message, index, interval); }, interval);
+        }
+    }
+
+    $(function () {
+
+        showText("#lead", "Food for Thought is a project made by people, for people, and nothing but the people. Robots are not allowed to use this", 0, 100);
+
+    });
+
+    $(window).load(function () {
+        function show_realvalue() {
+            $("#strike").wrap("<strike>");
+
+        };
+        window.setTimeout(show_realvalue, 10000); // 5 seconds
+    });
+
+
+    $(window).load(function () {
+        function show_realvalue() {
+            $('#strike').fadeOut('slow', function () {
+                $('#disappear').fadeIn('slow');
+            });
+        };
+        window.setTimeout(show_realvalue, 15000); // 5 seconds
+    });
+
+</script>
+  
