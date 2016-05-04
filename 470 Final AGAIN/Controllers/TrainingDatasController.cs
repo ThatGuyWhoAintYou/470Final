@@ -13,6 +13,7 @@ using Accord.Math;
 using Accord.MachineLearning.DecisionTrees.Learning;
 using Accord;
 
+
 namespace _470_Final_AGAIN.Controllers
 {
     public class TrainingDatasController : Controller
@@ -171,16 +172,20 @@ namespace _470_Final_AGAIN.Controllers
             tree = new DecisionTree(attributes, classCount);
             // Create a new instance of the ID3 algorithm
             ID3Learning id3learning = new ID3Learning(tree);
+            //C45Learning c45 = new C45Learning(tree);
+            //c45.Run(inputs.ToDouble(), outputs);
+           
 
             // Learn the training instances!
             ViewBag.Salty = "No memes";
             
                 
-               id3learning.Run(inputs, outputs);
+            id3learning.Run(inputs, outputs);
 
 
             String answer=  codebook.Translate("ShowUser", tree.Compute(codebook.Translate("No", "No", "No", "No", "No", "No", "3", "<10")));
             ViewBag.Salty = answer;
+           
         }
     }
 }
