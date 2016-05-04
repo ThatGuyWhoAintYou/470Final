@@ -1,0 +1,90 @@
+﻿@model _470_Final_AGAIN.Models.TrainingData
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TrainingData</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Salty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Salty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sweet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sweet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bitter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bitter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Meaty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Meaty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Piquant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Piquant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrepTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrepTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShowUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShowUser)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

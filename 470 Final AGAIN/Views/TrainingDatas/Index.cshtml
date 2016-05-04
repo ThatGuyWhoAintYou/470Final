@@ -1,0 +1,83 @@
+﻿@model IEnumerable<_470_Final_AGAIN.Models.TrainingData>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Salty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sour)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sweet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bitter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Meaty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Piquant)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrepTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShowUser)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Salty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sour)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sweet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bitter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Meaty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Piquant)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrepTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShowUser)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+
+            @Html.ViewBag.Salty
+        </td>
+    </tr>
+}
+
+</table>

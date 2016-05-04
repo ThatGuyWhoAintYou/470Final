@@ -1,0 +1,96 @@
+﻿@model _470_Final_AGAIN.Models.TrainingData
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>TrainingData</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Salty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Salty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sweet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sweet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bitter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bitter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Meaty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Meaty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Piquant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Piquant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrepTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrepTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShowUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShowUser)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
