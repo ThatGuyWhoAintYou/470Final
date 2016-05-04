@@ -185,7 +185,7 @@ namespace _470_Final_AGAIN.Controllers
 
             //String answer=  codebook.Translate("ShowUser", tree.Compute(codebook.Translate("No", "No", "No", "No", "No", "No", "3", "<10")));
             //ViewBag.Salty = answer;
-           
+                  
         }
     }
 }
