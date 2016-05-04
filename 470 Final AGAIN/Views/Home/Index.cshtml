@@ -1,7 +1,6 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
 <div class="jumbotron">
     <h1>Food for Thought</h1>
     <p class="lead">Food for Thought is a project made by people, for people, and nothing but the people. Robots are not allowed to use this</p>
@@ -11,6 +10,17 @@
 <div class="row">
     <div class="col-md-8">
         <h2><s>Simulate</s> Stimulate your tastebuds now!</h2>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Start here! &raquo;</a></p>
+        <p> <a class="btn btn-default" >Start here! &raquo;</a></p>
+
+        @using (Html.BeginForm("Ingredients", "Api"))
+        {
+            @Html.TextBox("Ingredient1")
+            @Html.TextBox("Ingredient2")
+            @Html.TextBox("Ingredient3")
+            @Html.TextBox("Ingredient4")
+            @Html.TextBox("Ingredient5")
+            <input type="submit" name="Submit" value="Submit" />
+        }
+        
     </div>
 </div>
