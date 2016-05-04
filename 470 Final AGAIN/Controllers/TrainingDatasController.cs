@@ -162,7 +162,7 @@ namespace _470_Final_AGAIN.Controllers
               new DecisionVariable("Bitter",     3),
               new DecisionVariable("Meaty",     3),
               new DecisionVariable("Piquant",     3),
-              new DecisionVariable("Rating",     3),
+              new DecisionVariable("Rating",     5),
               new DecisionVariable("PrepTime",     3)
             };
 
