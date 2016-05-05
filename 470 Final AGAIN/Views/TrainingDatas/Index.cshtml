@@ -4,15 +4,11 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+           @Html.DisplayNameFor(model => model.Name)
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.Salty)
@@ -47,7 +43,8 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+           @{ var url = "http://www.google.com/search?q="; var query = item.Name; }
+          <a href= "@url+ @query"> @Html.DisplayFor(modelItem => item.Name) </a>
         </td>
         @*<td>
             @Html.DisplayFor(modelItem => item.Salty)
