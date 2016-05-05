@@ -22,16 +22,13 @@ namespace _470_Final_AGAIN.Controllers
 {
     public class TrainingDatasController : Controller
     {
-        DataTable data = new DataTable("Mitchell's Tennis Example");
-        Codification codebook;
-        DecisionTree tree;
 
         private TrainingDBContext db = new TrainingDBContext();
 
         // GET: TrainingDatas
         public ActionResult Index()
         {
-            Train();
+            
             return View(db.TrainingDatas.ToList());
         }
 
@@ -140,8 +137,11 @@ namespace _470_Final_AGAIN.Controllers
         }
 
 
-        public void Train()
+        public void Train(TrainingData toTest)
         {
+            DataTable data = new DataTable("Making This every time is fun!!!");
+            Codification codebook;
+            DecisionTree tree;
             data.Columns.Add("ID","Salty","Sour","Sweet","Bitter","Meaty","Piquant","Rating","PrepTime","ShowUser");
 
             List<TrainingData> t = db.TrainingDatas.ToList();
@@ -176,18 +176,11 @@ namespace _470_Final_AGAIN.Controllers
             tree = new DecisionTree(attributes, classCount);
             // Create a new instance of the ID3 algorithm
             ID3Learning id3learning = new ID3Learning(tree);
-            //C45Learning c45 = new C45Learning(tree);
-            //c45.Run(inputs.ToDouble(), outputs);
-           
-
-            // Learn the training instances!
-            ViewBag.Salty = "No memes";
-            
-                
-           // id3learning.Run(inputs, outputs);
+             id3learning.Run(inputs, outputs);
 
 
-            //String answer=  codebook.Translate("ShowUser", tree.Compute(codebook.Translate("No", "No", "No", "No", "No", "No", "3", "<10")));
+            String answer=  codebook.Translate("ShowUser", tree.Compute(codebook.Translate(toTest.Salty, toTest.Sour, toTest.Sweet, toTest.Bitter, toTest.Meaty, toTest.Piquant, toTest.Rating, toTest.PrepTime)));
+            toTest.ShowUser = answer;
             //ViewBag.Salty = answer;
                   
         }
@@ -199,15 +192,258 @@ namespace _470_Final_AGAIN.Controllers
             var fromApi = TempData["dataToSend"] as JsonDataStoreModel; // for 1 & 2 & 3
             var fromApi2 = TempData["dataToSend2nd"] as JsonDataStoreModel; // for 3 & 4 & 5
 
-            TrainingData[] hahahaha;
+            
+            List<TrainingData> testSet = new List<TrainingData>();
+
+           
 
             foreach(JObject item in fromApi.matches)
             {
-                TrainingData matchData = item.ToObject<TrainingData>();
+                
+                    try {
+
+                    TrainingData jj = new TrainingData();
+                    jj.Name =  item.SelectToken("id").ToString();
+                    var gg = item.SelectToken("flavors");
+
+                    
+                   if(Double.Parse(gg.SelectToken("salty").ToString()) < .4)
+                        {
+                        jj.Salty = "No";
+                        }
+                    else if (Double.Parse(gg.SelectToken("salty").ToString()) < .6)
+                    {
+                        jj.Salty = "kinda";
+                    }
+                    else
+                    {
+                        jj.Salty = "very";
+                    }
+
+                    if (Double.Parse(gg.SelectToken("sour").ToString()) < .4)
+                    {
+                        jj.Sour = "No";
+                    }
+                    else if (Double.Parse(gg.SelectToken("sour").ToString()) < .6)
+                    {
+                        jj.Sour = "kinda";
+                    }
+                    else
+                    {
+                        jj.Sour = "very";
+                    }
+
+                    if (Double.Parse(gg.SelectToken("sweet").ToString()) < .4)
+                    {
+                        jj.Sweet = "No";
+                    }
+                    else if (Double.Parse(gg.SelectToken("sweet").ToString()) < .6)
+                    {
+                        jj.Sweet = "kinda";
+                    }
+                    else
+                    {
+                        jj.Sweet = "very";
+                    }
+                    if (Double.Parse(gg.SelectToken("bitter").ToString()) < .4)
+                    {
+                        jj.Bitter = "No";
+                    }
+                    else if (Double.Parse(gg.SelectToken("bitter").ToString()) < .6)
+                    {
+                        jj.Bitter = "kinda";
+                    }
+                    else
+                    {
+                        jj.Bitter = "very";
+                    }
+
+                    if (Double.Parse(gg.SelectToken("meaty").ToString()) < .4)
+                    {
+                        jj.Meaty = "No";
+                    }
+                    else if (Double.Parse(gg.SelectToken("meaty").ToString()) < .6)
+                    {
+                        jj.Meaty = "kinda";
+                    }
+                    else
+                    {
+                        jj.Meaty= "very";
+                    }
+
+
+                    if (Double.Parse(gg.SelectToken("piquant").ToString()) < .4)
+                    {
+                        jj.Piquant = "No";
+                    }
+                    else if (Double.Parse(gg.SelectToken("piquant").ToString()) < .6)
+                    {
+                        jj.Piquant = "kinda";
+                    }
+                    else
+                    {
+                        jj.Piquant = "very";
+                    }
+                    jj.Rating = Int32.Parse( item.SelectToken("rating").ToString()).ToString();
+
+
+                    if (Double.Parse(item.SelectToken("totalTimeInSeconds").ToString()) < 1200)
+                    {
+                        jj.PrepTime = "Short";
+                    }
+                    else if (Double.Parse(item.SelectToken("totalTimeInSeconds").ToString()) < 2400)
+                    {
+                        jj.PrepTime = "Medium";
+                    }
+                    else
+                    {
+                        jj.PrepTime = "Long";
+                    }
+                    
+
+                    testSet.Add(jj);
+
+
+
+
+
+
+
+
+
+                } catch (Exception e)
+                    {
+                        //oops, you dun goofed
+                    }
                 
             }
-            
+            foreach (JObject item in fromApi2.matches)
+            {
 
+                try
+                {
+
+                    TrainingData jj = new TrainingData();
+                    jj.Name = item.SelectToken("id").ToString();
+                    var gg = item.SelectToken("flavors");
+
+
+                    if (Double.Parse(gg.SelectToken("salty").ToString()) < .4)
+                    {
+                        jj.Salty = "No";
+                    }
+                    else if (Double.Parse(gg.SelectToken("salty").ToString()) < .6)
+                    {
+                        jj.Salty = "kinda";
+                    }
+                    else
+                    {
+                        jj.Salty = "very";
+                    }
+
+                    if (Double.Parse(gg.SelectToken("sour").ToString()) < .4)
+                    {
+                        jj.Sour = "No";
+                    }
+                    else if (Double.Parse(gg.SelectToken("sour").ToString()) < .6)
+                    {
+                        jj.Sour = "kinda";
+                    }
+                    else
+                    {
+                        jj.Sour = "very";
+                    }
+
+                    if (Double.Parse(gg.SelectToken("sweet").ToString()) < .4)
+                    {
+                        jj.Sweet = "No";
+                    }
+                    else if (Double.Parse(gg.SelectToken("sweet").ToString()) < .6)
+                    {
+                        jj.Sweet = "kinda";
+                    }
+                    else
+                    {
+                        jj.Sweet = "very";
+                    }
+                    if (Double.Parse(gg.SelectToken("bitter").ToString()) < .4)
+                    {
+                        jj.Bitter = "No";
+                    }
+                    else if (Double.Parse(gg.SelectToken("bitter").ToString()) < .6)
+                    {
+                        jj.Bitter = "kinda";
+                    }
+                    else
+                    {
+                        jj.Bitter = "very";
+                    }
+
+                    if (Double.Parse(gg.SelectToken("meaty").ToString()) < .4)
+                    {
+                        jj.Meaty = "No";
+                    }
+                    else if (Double.Parse(gg.SelectToken("meaty").ToString()) < .6)
+                    {
+                        jj.Meaty = "kinda";
+                    }
+                    else
+                    {
+                        jj.Meaty = "very";
+                    }
+
+
+                    if (Double.Parse(gg.SelectToken("piquant").ToString()) < .4)
+                    {
+                        jj.Piquant = "No";
+                    }
+                    else if (Double.Parse(gg.SelectToken("piquant").ToString()) < .6)
+                    {
+                        jj.Piquant = "kinda";
+                    }
+                    else
+                    {
+                        jj.Piquant = "very";
+                    }
+                    jj.Rating = Int32.Parse(item.SelectToken("rating").ToString()).ToString();
+
+
+                    if (Double.Parse(item.SelectToken("totalTimeInSeconds").ToString()) < 1200)
+                    {
+                        jj.PrepTime = "Short";
+                    }
+                    else if (Double.Parse(item.SelectToken("totalTimeInSeconds").ToString()) < 2400)
+                    {
+                        jj.PrepTime = "Medium";
+                    }
+                    else
+                    {
+                        jj.PrepTime = "Long";
+                    }
+
+
+                    testSet.Add(jj);
+
+
+
+
+
+
+
+
+
+                }
+                catch (Exception e)
+                {
+                    //oops, you dun goofed
+                }
+
+            }
+
+            foreach (TrainingData test in testSet)
+            {
+                Train(test);
+            }
             // REPLACE the code below and make use of data from api. It has an array of 10 recipe matches, total count and others.
             return Json(fromApi, JsonRequestBehavior.AllowGet);
         }
