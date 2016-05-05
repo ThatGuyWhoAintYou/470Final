@@ -9,12 +9,17 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using _470_Final_AGAIN.Models;
+using System.Web.Helpers;
+using System.Web.Security;
 
 namespace _470_Final_AGAIN.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+
+        private  TrainingDBContext db = new TrainingDBContext ();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -59,6 +64,23 @@ namespace _470_Final_AGAIN.Controllers
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult Login(string email, string password)
+        {
+            User loginUser = db.Users.FirstOrDefault(u => u.Email == email);
+            if (loginUser != null)
+            {
+                if (Crypto.VerifyHashedPassword(loginUser.Password, password))
+                {
+                    FormsAuthentication.SetAuthCookie(loginUser.Email, false);
+                    return RedirectToAction("Index", "Admin");
+                }
+            }
+            ModelState.AddModelError("Email", "Email or Password was incorrect!");
+            return View(new User() { Email = email });
         }
 
         //

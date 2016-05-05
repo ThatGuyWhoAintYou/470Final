@@ -13,10 +13,12 @@
 
 .heading{
      font-size: 27px;
+
 }
 
 #lead{
     font-size: 20px;
+    color:#B71C1C;
 }
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 

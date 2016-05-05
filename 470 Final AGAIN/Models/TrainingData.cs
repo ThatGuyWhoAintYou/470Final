@@ -24,5 +24,8 @@ namespace _470_Final_AGAIN.Models
     public class TrainingDBContext: DbContext
     {
         public DbSet<TrainingData> TrainingDatas { get; set; }
+
+        public DbSet<User>
     }
+
 }
