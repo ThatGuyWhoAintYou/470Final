@@ -12,7 +12,7 @@ using Accord.MachineLearning.DecisionTrees;
 using Accord.Math;
 using Accord.MachineLearning.DecisionTrees.Learning;
 using Accord;
-
+using RestSharp;
 
 namespace _470_Final_AGAIN.Controllers
 {
@@ -190,6 +190,16 @@ namespace _470_Final_AGAIN.Controllers
             }
            ViewBag.Salty = answer;
                   
+        }
+
+        // GET: Recipe
+        public JsonResult GetRecipeFromApiController()
+        {
+           
+            var fromApi = TempData["dataToSend"];
+            
+            // REPLACE the code below and make use of data from api. It has an array of 10 recipe matches, total count and others.
+            return Json(fromApi, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    color: #E8EAF6;
+    background: url('http://02649c0d202d60570889-919fab6897895736201f7257cf21a760.r0.cf3.nb.production.rs.nbcdn.io/bg-studio2.jpg') ;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -9,6 +11,13 @@
     padding-right: 15px;
 }
 
+.heading{
+     font-size: 27px;
+}
+
+#lead{
+    font-size: 20px;
+}
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
