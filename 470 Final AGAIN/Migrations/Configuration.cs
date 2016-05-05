@@ -9,7 +9,7 @@ namespace _470_Final_AGAIN.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "_470_Final_AGAIN.Models.TrainingDBContext";
         }
 

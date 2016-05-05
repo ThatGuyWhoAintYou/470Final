@@ -203,7 +203,7 @@ namespace _470_Final_AGAIN.Controllers
                     try {
 
                     TrainingData jj = new TrainingData();
-                    jj.ID =  item.SelectToken("id").ToString();
+                    jj.Name =  item.SelectToken("id").ToString();
                     var gg = item.SelectToken("flavors");
 
                     
@@ -324,7 +324,7 @@ namespace _470_Final_AGAIN.Controllers
                 {
 
                     TrainingData jj = new TrainingData();
-                    jj.ID = item.SelectToken("id").ToString();
+                    jj.Name = item.SelectToken("id").ToString();
                     var gg = item.SelectToken("flavors");
 
 

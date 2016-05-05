@@ -9,7 +9,8 @@ namespace _470_Final_AGAIN.Models
 {
     public class TrainingData
     {
-        public String ID { get; set; }
+        public int ID { get; set; }
+        public String Name { get; set; }
         public String Salty { get; set; }
         public String Sour { get; set; }
         public String Sweet { get; set; }
