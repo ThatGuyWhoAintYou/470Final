@@ -31,7 +31,7 @@ namespace _470_Final_AGAIN.Controllers
             //For 3 and 4 and 5
             TempData["dataToSend2nd"] = await RunAsync(Ingredient3, Ingredient4, Ingredient5);
 
-            return RedirectToAction("GetRecipeFromApiController", "TrainingDatas"); 
+            return RedirectToAction("Index", "TrainingDatas"); 
         }
 
         static async Task<JsonDataStoreModel> RunAsync(string Ingredient1,string Ingredient2, string Ingredient3)
