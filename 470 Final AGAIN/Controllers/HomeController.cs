@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _470_Final_AGAIN.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,9 @@ namespace _470_Final_AGAIN.Controllers
 {
     public class HomeController : Controller
     {
+
+        private TrainingDBContext db = new TrainingDBContext();
+
         public ActionResult Index()
         {
             return View();
@@ -15,10 +19,17 @@ namespace _470_Final_AGAIN.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            
+                //ViewBag.Users = db.Users.ToList();
+                //ViewBag.TrainingDatas = db.TrainingDatas.ToList();
 
-            return View();
+
+                return View();
+        
         }
+       
+
+       
 
         public ActionResult Contact()
         {

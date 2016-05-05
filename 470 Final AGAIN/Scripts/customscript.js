@@ -1,4 +1,7 @@
-﻿$(function () {
+﻿/// <reference path="jquery-1.10.2.js" />
+
+
+$(function () {
 
     // Checking for CSS 3D transformation support
     $.support.css3d = supportsCSS3D();
@@ -19,13 +22,7 @@
         e.preventDefault();
     });
 
-    formContainer.find('form').submit(function (e) {
-        // Preventing form submissions. If you implement
-        // a backend, you might want to remove this code
-        e.preventDefault();
-    });
-
-
+  
     // A helper function that checks for the 
     // support of the 3D CSS3 transformations.
     function supportsCSS3D() {

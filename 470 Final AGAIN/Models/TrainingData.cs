@@ -25,7 +25,7 @@ namespace _470_Final_AGAIN.Models
     {
         public DbSet<TrainingData> TrainingDatas { get; set; }
 
-        public DbSet<User>
+        public DbSet<User> Users { get; set; }
     }
 
 }

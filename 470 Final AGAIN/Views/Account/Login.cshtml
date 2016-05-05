@@ -1,64 +1,87 @@
-﻿@using _470_Final_AGAIN.Models
-@model LoginViewModel
+﻿@model _470_Final_AGAIN.Models.User
 @{
     ViewBag.Title = "Log in";
 }
 
-@*@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-                @Html.AntiForgeryToken()
+<link href="~/Content/styles.css" rel="stylesheet" />
+<section id="loginForm" style="margin-top:250px;">
+    <div id="formContainer">
+        @using (Html.BeginForm("LogIn", "Account", FormMethod.Post, new { role = "form", @id = "login" }))
+        {
+            @Html.AntiForgeryToken()
 
-                < hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-    <div class="col-md-10">
-        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-    </div>
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+         
+            <a href="#" id="flipToRecover" class="flipLink">Forgot?</a>
+                <input type="text" name="report" id="Email" placeholder="Email" />
+
+                <input type="password" name="final" id="Password" placeholder="Password" />
+
+                <input type="submit" name="submit" value="Login" />
+
+               
+        }
+
+        @using (Html.BeginForm("Try", "Account", FormMethod.Post, new { role = "form", @id = "recover" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+
+            <a href="#" id="flipToLogin" class="flipLink">Forgot?</a>
+
+            <input type="text" name="recoverEmail" id="recoverEmail" value="Email" />
+            
+            <input type="submit" name="submit" value="Recover" />
+
+        }
+      
+
+     
 </div>
-<div class="form-group">
-    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-    <div class="col-md-10">
-        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-    </div>
-</div>
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-        <div class="checkbox">
-            @Html.CheckBoxFor(m => m.RememberMe)
-            @Html.LabelFor(m => m.RememberMe)
-        </div>
-    </div>
-</div>
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-        <input type = "submit" value="Log in" class="btn btn-default" />
-    </div>
-</div>
-<p>
-    @Html.ActionLink("Register as a new user", "Register")
-</p>
+</section>
 
-}*@
+   
 
- <section id="loginForm" style="margin-top:250px;">
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script src="~/Scripts/customscript.js"></script>
+        }
+       
+      
 
-                    <div id="formContainer">
-                        @*new {  }
 
-                        new {ReturnUrl = ViewBag.ReturnUrl }*@
-                            <form id="login"  method="post" action=@Url.Action("Login","Account") >
-                                <a href="#" id="flipToRecover" class="flipLink">Forgot?</a>
 
-                                <input type="text" name="Email" id="Email" placeholder="Email" />
-                                <input type="password" name="Password" id="Password" placeholder="Password" />
 
-                                <input type="submit" name="submit" value="Login" />
-                            </form>
 
-                            <form id="recover" method="post" action="./">
+
+@*All the scratch and trash *@
+
+@*<section id="loginForm" style="margin-top:250px;">
+
+    <div id="formContainer">
+        @*new {  }
+
+        new {ReturnUrl = ViewBag.ReturnUrl }*@
+@*@using (Html.BeginForm("SignIn", "Account", new { User }, FormMethod.Post, new { id = "login" }))*@
+@*@using (Html.BeginForm())
+    {
+       @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @*<form id="login"  method="post" action=@Url.Action("SignIn", "Account"),new{ Email = Email , Password = Password} >*@
+@*<a href = "#" id = "flipToRecover" class="flipLink">Forgot?</a>*@
+@*<input type="text" name="report" />
+    <input type="text" name="final" />*@
+@*<input type="text" name="report" id="Email" placeholder="Email" />
+    <input type="password" name="final" id="Password" placeholder="Password" />
+
+    <input type="submit" class="btn btn-default" value="Register" />*@
+@*}*@
+@*</form>*@
+
+
+@*<form id="recover" method="post" action="./">
 
                                 <a href="#" id="flipToLogin" class="flipLink">Forgot?</a>
 
@@ -67,55 +90,4 @@
 
                             </form>
     </div>
-            </section>
-  
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-<script src="~/Scripts/customscript.js"></script>
-}
-<link rel="stylesheet" href="~/Content/styles.css" />
-@*<script>
-
-     $(document).ready(function () {
-
-         $('form').submit(function () {
-
-             var someObj = {
-              
-                 UserName: $('#loginEmail').val(),
-                 DateCreated: new Date(),
-                 CommentText: $('#loginPass').val()
-             };
-
-            $.ajax({
-                url: '@Url.Action("CommentForm")',
-                type: "POST",
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(someObj),
-   
-                success: function (result) {
-
-                    alert("Login Sucessful " + result.UserName);
-                },
-                error: function (result) {
-                    alert("Login Failed");
-                }
-            });
-          return false;
-        });
-    });
-
-
-
-</script>*@
-
-
-
-
-               @*Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
-           
+            </section>*@

@@ -33,6 +33,12 @@ namespace _470_Final_AGAIN.Controllers
             SignInManager = signInManager;
         }
 
+        public ActionResult Index()
+        {
+            return View("Dashboard");
+        }
+
+
         public ApplicationSignInManager SignInManager
         {
             get
@@ -67,51 +73,97 @@ namespace _470_Final_AGAIN.Controllers
         }
 
 
-        [HttpPost]
-        public ActionResult Login(string email, string password)
+        public ActionResult Try(string report)
         {
-            User loginUser = db.Users.FirstOrDefault(u => u.Email == email);
-            if (loginUser != null)
-            {
-                if (Crypto.VerifyHashedPassword(loginUser.Password, password))
-                {
-                    FormsAuthentication.SetAuthCookie(loginUser.Email, false);
-                    return RedirectToAction("Index", "Admin");
-                }
-            }
-            ModelState.AddModelError("Email", "Email or Password was incorrect!");
-            return View(new User() { Email = email });
+            return RedirectToAction("Register", "Account");
         }
 
-        //
+        public ActionResult SignIn(string Email, string Password)
+        {
+            var userInDatabase = db.Users.FirstOrDefault(u => u.Email == Email);
+
+            if (ModelState.IsValid && userInDatabase != null)
+            {
+                bool verifyPassword = Crypto.VerifyHashedPassword(userInDatabase.Password, Password);
+                if (verifyPassword == true)
+                {
+                    // creating authetication ticket
+                    FormsAuthentication.SetAuthCookie(Email, false);
+                        
+                    return RedirectToAction("Index", "Account");
+                }
+                else
+                {
+                    @ViewBag.Message = "Error.Ivalid login.";
+                }
+            }
+            ModelState.AddModelError("UserDoesNotExist", "Username or Password is Incorrect! Please try Again!!");
+            return View();
+        }
+
+
+
+
+
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(string report , string final)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
+            return RedirectToAction("About", "Home");
         }
+
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(model);
+        //    }
+
+        //    // This doesn't count login failures towards account lockout
+        //    // To enable password failures to trigger account lockout, change to shouldLockout: true
+        //    var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+        //    switch (result)
+        //    {
+        //        case SignInStatus.Success:
+        //            return RedirectToLocal(returnUrl);
+        //        case SignInStatus.LockedOut:
+        //            return View("Lockout");
+        //        case SignInStatus.RequiresVerification:
+        //            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+        //        case SignInStatus.Failure:
+        //        default:
+        //            ModelState.AddModelError("", "Invalid login attempt.");
+        //            return View(model);
+        //    }
+        //}
+
+
+
+        //public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(model);
+        //    }
+
+        //    // This doesn't count login failures towards account lockout
+        //    // To enable password failures to trigger account lockout, change to shouldLockout: true
+        //    var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+        //    switch (result)
+        //    {
+        //        case SignInStatus.Success:
+        //            return RedirectToLocal(returnUrl);
+        //        case SignInStatus.LockedOut:
+        //            return View("Lockout");
+        //        case SignInStatus.RequiresVerification:
+        //            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+        //        case SignInStatus.Failure:
+        //        default:
+        //            ModelState.AddModelError("", "Invalid login attempt.");
+        //            return View(model);
+        //    }
+        //}
 
         //
         // GET: /Account/VerifyCode
