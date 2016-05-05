@@ -187,6 +187,7 @@ namespace _470_Final_AGAIN.Controllers
             }
             //ViewBag.Salty = answer;
                   
+          
         }
 
         // GET: Recipe
@@ -203,10 +204,11 @@ namespace _470_Final_AGAIN.Controllers
 
             foreach(JObject item in fromApi.matches)
             {
-                
-                    try {
 
-                    TrainingData jj = new TrainingData();
+                TrainingData jj = new TrainingData();
+                try {
+
+                    
                     jj.Name =  item.SelectToken("id").ToString();
                     var gg = item.SelectToken("flavors");
 
@@ -303,9 +305,12 @@ namespace _470_Final_AGAIN.Controllers
                     {
                         jj.PrepTime = "Long";
                     }
-                    
 
-                    testSet.Add(jj);
+                    Train(jj);
+                    if (jj.ShowUser == "Yes")
+                    {
+                        testSet.Add(jj);
+                    }
 
 
 
@@ -426,7 +431,12 @@ namespace _470_Final_AGAIN.Controllers
                     }
 
 
-                    testSet.Add(jj);
+
+                    Train(jj);
+                    if (jj.ShowUser == "Yes")
+                    {
+                        testSet.Add(jj);
+                    }
 
 
 
@@ -444,10 +454,7 @@ namespace _470_Final_AGAIN.Controllers
 
             }
 
-            foreach (TrainingData test in testSet)
-            {
-                Train(test);
-            }
+           
             // REPLACE the code below and make use of data from api. It has an array of 10 recipe matches, total count and others.
             return testSet;
         }
