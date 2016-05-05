@@ -22,9 +22,6 @@ namespace _470_Final_AGAIN.Controllers
 {
     public class TrainingDatasController : Controller
     {
-        DataTable data = new DataTable("Mitchell's Tennis Example");
-        Codification codebook;
-        DecisionTree tree;
 
         private TrainingDBContext db = new TrainingDBContext();
 
@@ -142,6 +139,9 @@ namespace _470_Final_AGAIN.Controllers
 
         public void Train(TrainingData toTest)
         {
+            DataTable data = new DataTable("Making This every time is fun!!!");
+            Codification codebook;
+            DecisionTree tree;
             data.Columns.Add("ID","Salty","Sour","Sweet","Bitter","Meaty","Piquant","Rating","PrepTime","ShowUser");
 
             List<TrainingData> t = db.TrainingDatas.ToList();
