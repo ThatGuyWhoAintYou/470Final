@@ -29,7 +29,7 @@ namespace _470_Final_AGAIN.Controllers
         public ActionResult Index()
         {
             
-            return View(db.TrainingDatas.ToList());
+            return View(GetRecipeFromApiController());
         }
 
         // GET: TrainingDatas/Details/5
@@ -178,15 +178,19 @@ namespace _470_Final_AGAIN.Controllers
             ID3Learning id3learning = new ID3Learning(tree);
              id3learning.Run(inputs, outputs);
 
-
-            String answer=  codebook.Translate("ShowUser", tree.Compute(codebook.Translate(toTest.Salty, toTest.Sour, toTest.Sweet, toTest.Bitter, toTest.Meaty, toTest.Piquant, toTest.Rating, toTest.PrepTime)));
-            toTest.ShowUser = answer;
+            try {
+                String answer = codebook.Translate("ShowUser", tree.Compute(codebook.Translate(toTest.Salty, toTest.Sour, toTest.Sweet, toTest.Bitter, toTest.Meaty, toTest.Piquant, toTest.Rating, toTest.PrepTime)));
+                toTest.ShowUser = answer;
+            }catch(Exception e)
+            {
+                toTest.ShowUser = "Yes";
+            }
             //ViewBag.Salty = answer;
                   
         }
 
         // GET: Recipe
-        public JsonResult GetRecipeFromApiController()
+        public List<TrainingData> GetRecipeFromApiController()
         {
 
             var fromApi = TempData["dataToSend"] as JsonDataStoreModel; // for 1 & 2 & 3
@@ -445,7 +449,7 @@ namespace _470_Final_AGAIN.Controllers
                 Train(test);
             }
             // REPLACE the code below and make use of data from api. It has an array of 10 recipe matches, total count and others.
-            return Json(fromApi, JsonRequestBehavior.AllowGet);
+            return testSet;
         }
     }
 }
