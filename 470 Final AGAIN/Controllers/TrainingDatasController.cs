@@ -13,6 +13,10 @@ using Accord.Math;
 using Accord.MachineLearning.DecisionTrees.Learning;
 using Accord;
 using RestSharp;
+using RestSharp.Serializers;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using System.Web.Script.Serialization;
 
 namespace _470_Final_AGAIN.Controllers
 {
@@ -27,6 +31,7 @@ namespace _470_Final_AGAIN.Controllers
         // GET: TrainingDatas
         public ActionResult Index()
         {
+            Train();
             return View(db.TrainingDatas.ToList());
         }
 
@@ -137,7 +142,6 @@ namespace _470_Final_AGAIN.Controllers
 
         public void Train()
         {
-            
             data.Columns.Add("ID","Salty","Sour","Sweet","Bitter","Meaty","Piquant","Rating","PrepTime","ShowUser");
 
             List<TrainingData> t = db.TrainingDatas.ToList();
@@ -180,35 +184,29 @@ namespace _470_Final_AGAIN.Controllers
             ViewBag.Salty = "No memes";
             
                 
-           id3learning.Run(inputs, outputs);
-            String answer;
-            try {
-                answer = codebook.Translate("ShowUser", tree.Compute(codebook.Translate("Very", "No", "No", "No", "No", "No", "3", "<10")));
-            }catch(Exception e)
-            {
-                answer = "Yes";
-            }
-           ViewBag.Salty = answer;
+           // id3learning.Run(inputs, outputs);
+
+
+            //String answer=  codebook.Translate("ShowUser", tree.Compute(codebook.Translate("No", "No", "No", "No", "No", "No", "3", "<10")));
+            //ViewBag.Salty = answer;
                   
         }
 
         // GET: Recipe
         public JsonResult GetRecipeFromApiController()
         {
-           
-            JsonDataStoreModel fromApi = TempData["dataToSend"] as JsonDataStoreModel;
 
-            //Train the data
-            
-            String[] Attributes = new String[8];
+            var fromApi = TempData["dataToSend"] as JsonDataStoreModel; // for 1 & 2 & 3
+            var fromApi2 = TempData["dataToSend2nd"] as JsonDataStoreModel; // for 3 & 4 & 5
 
-            for(int i = 0; i < fromApi.matches.Count; i++)
+            TrainingData[] hahahaha;
+
+            foreach(JObject item in fromApi.matches)
             {
-
-
-                //run the tree
+                TrainingData matchData = item.ToObject<TrainingData>();
+                
             }
-
+            
 
             // REPLACE the code below and make use of data from api. It has an array of 10 recipe matches, total count and others.
             return Json(fromApi, JsonRequestBehavior.AllowGet);
