@@ -12,7 +12,11 @@ using Accord.MachineLearning.DecisionTrees;
 using Accord.Math;
 using Accord.MachineLearning.DecisionTrees.Learning;
 using Accord;
-
+using RestSharp;
+using RestSharp.Serializers;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using System.Web.Script.Serialization;
 
 namespace _470_Final_AGAIN.Controllers
 {
@@ -186,6 +190,26 @@ namespace _470_Final_AGAIN.Controllers
             //String answer=  codebook.Translate("ShowUser", tree.Compute(codebook.Translate("No", "No", "No", "No", "No", "No", "3", "<10")));
             //ViewBag.Salty = answer;
                   
+        }
+
+        // GET: Recipe
+        public JsonResult GetRecipeFromApiController()
+        {
+
+            var fromApi = TempData["dataToSend"] as JsonDataStoreModel; // for 1 & 2 & 3
+            var fromApi2 = TempData["dataToSend2nd"] as JsonDataStoreModel; // for 3 & 4 & 5
+
+            TrainingData[] hahahaha;
+
+            foreach(JObject item in fromApi.matches)
+            {
+                TrainingData matchData = item.ToObject<TrainingData>();
+                
+            }
+            
+
+            // REPLACE the code below and make use of data from api. It has an array of 10 recipe matches, total count and others.
+            return Json(fromApi, JsonRequestBehavior.AllowGet);
         }
     }
 }
