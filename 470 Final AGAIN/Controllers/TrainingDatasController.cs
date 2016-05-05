@@ -191,9 +191,11 @@ namespace _470_Final_AGAIN.Controllers
         // GET: Recipe
         public JsonResult GetRecipeFromApiController()
         {
-           
-            var fromApi = TempData["dataToSend"];
-            
+
+            var fromApi = TempData["dataToSend"] as JsonDataStoreModel; // for 1 & 2 & 3
+            var fromApi2 = TempData["dataToSend2nd"] as JsonDataStoreModel; // for 3 & 4 & 5
+
+
             // REPLACE the code below and make use of data from api. It has an array of 10 recipe matches, total count and others.
             return Json(fromApi, JsonRequestBehavior.AllowGet);
         }
