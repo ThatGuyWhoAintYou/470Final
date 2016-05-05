@@ -45,6 +45,9 @@ namespace _470_Final_AGAIN.Controllers
                 // condition? so that results including 1 or 2 ing are shown. ASOFNOW: searches for intersection of all ingredients
                 query["q"] = Ingredient1;
                 query["q"] = Ingredient2;
+                query["q"] = Ingredient3;
+                query["q"] = Ingredient4;
+                query["q"] = Ingredient5;
 
                 uriBuilder.Query = query.ToString();
 

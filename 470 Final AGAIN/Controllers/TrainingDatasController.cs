@@ -27,7 +27,6 @@ namespace _470_Final_AGAIN.Controllers
         // GET: TrainingDatas
         public ActionResult Index()
         {
-            Train();
             return View(db.TrainingDatas.ToList());
         }
 
@@ -138,6 +137,7 @@ namespace _470_Final_AGAIN.Controllers
 
         public void Train()
         {
+            
             data.Columns.Add("ID","Salty","Sour","Sweet","Bitter","Meaty","Piquant","Rating","PrepTime","ShowUser");
 
             List<TrainingData> t = db.TrainingDatas.ToList();
@@ -196,8 +196,20 @@ namespace _470_Final_AGAIN.Controllers
         public JsonResult GetRecipeFromApiController()
         {
            
-            var fromApi = TempData["dataToSend"];
+            JsonDataStoreModel fromApi = TempData["dataToSend"] as JsonDataStoreModel;
+
+            //Train the data
             
+            String[] Attributes = new String[8];
+
+            for(int i = 0; i < fromApi.matches.Count; i++)
+            {
+
+
+                //run the tree
+            }
+
+
             // REPLACE the code below and make use of data from api. It has an array of 10 recipe matches, total count and others.
             return Json(fromApi, JsonRequestBehavior.AllowGet);
         }
