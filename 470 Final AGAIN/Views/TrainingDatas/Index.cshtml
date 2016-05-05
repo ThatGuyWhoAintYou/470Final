@@ -5,11 +5,7 @@
 }
 
 
-<table class="table">
-    <tr>
-        <th>
-           @Html.DisplayNameFor(model => model.Name)
-        </th>
+<h1> Our Suggestion for you </h1>
         @*<th>
             @Html.DisplayNameFor(model => model.Salty)
         </th>
@@ -38,14 +34,27 @@
             @Html.DisplayNameFor(model => model.ShowUser)
         </th>
         <th></th>*@
-    </tr>
+   @foreach (var item in Model)
+   {
+    <div class="col-md-3 col-sm-12 col-xs-12">
+        <div class="panel panel-primary text-center no-boder bg-color-brown">
+            <div class="panel-body">
+                <i class="fa fa-video-camera fa-5x"></i>
+                <h3 style="color:#B71C1C;">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </h3>
+            </div>
+            <div class="panel-footer back-footer-brown">
+                @{ var url = "http://www.google.com/search?q="; var query = item.Name; }
+                <a href="@url+ @query"> See the recepies </a>    
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-           @{ var url = "http://www.google.com/search?q="; var query = item.Name; }
-          <a href= "@url+ @query"> @Html.DisplayFor(modelItem => item.Name) </a>
-        </td>
+            </div>
+        </div>
+    </div>
+  
+
+                    }
+  
         @*<td>
             @Html.DisplayFor(modelItem => item.Salty)
         </td>
@@ -80,7 +89,5 @@
 
             @Html.ViewBag.Salty
         </td>*@
-    </tr>
-}
 
-</table>
+
